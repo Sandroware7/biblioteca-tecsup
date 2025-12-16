@@ -46,7 +46,7 @@ class User extends Authenticatable
         ];
     }
 
-    // Relación: Un usuario puede tener muchos préstamos
+    // un usuario puede tener muchos prestamos
     public function loans()
     {
         return $this->hasMany(Loan::class);

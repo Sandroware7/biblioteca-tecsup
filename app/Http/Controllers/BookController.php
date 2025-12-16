@@ -100,4 +100,23 @@ class BookController extends Controller
             ->with('success', '¡Libro eliminado correctamente!');
     }
 
+    // catalogo público sin estar logeado
+    public function catalog(Request $request)
+    {
+        $query = \App\Models\Book::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('author', 'like', '%' . $search . '%')
+                    ->orWhere('year', 'like', '%' . $search . '%');
+            });
+        }
+
+        $books = $query->paginate(12)->withQueryString();
+
+        return view('welcome', compact('books'));
+    }
+
 }

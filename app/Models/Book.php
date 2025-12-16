@@ -10,14 +10,10 @@ class Book extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'author',
-        'year',
-        'stock'
+        'title', 'author', 'year', 'stock', 'available'
     ];
 
-    public function loans()
-    {
+    public function loans() {
         return $this->hasMany(Loan::class);
     }
 }
