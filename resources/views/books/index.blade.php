@@ -10,6 +10,30 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
+                    @if(session('success'))
+                        <div x-data="{ show: true }" x-show="show" x-transition
+                             class="flex justify-between items-center bg-lime-100 border border-lime-200 text-gray-800 p-4 mb-6 shadow-sm rounded-lg"
+                             role="alert">
+
+                            <div class="flex items-center">
+                                <div class="text-gray-600 mr-3">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <p class="font-semibold text-sm text-gray-950">¡Hecho!</p> <p class="text-sm text-gray-800">{{ session('success') }}</p> </div>
+                            </div>
+
+                            <button @click="show = false" class="text-gray-500 hover:text-gray-950 transition-colors duration-150 ease-in-out p-1 rounded-full hover:bg-lime-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    @endif
+
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-lg font-bold text-gray-700">Listado de Libros</h3>
                         <a href="{{ route('books.create') }}"
