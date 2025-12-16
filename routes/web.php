@@ -27,4 +27,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return "¡Bienvenido al Panel de Administrador!";
     })->name('admin.dashboard');
 
+    Route::resource('books', \App\Http\Controllers\BookController::class);
+
 });
