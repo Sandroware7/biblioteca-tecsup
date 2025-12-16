@@ -18,3 +18,13 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+// Grupo de rutas protegidas para Administradores
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin/dashboard', function () {
+        return "¡Bienvenido al Panel de Administrador!";
+    })->name('admin.dashboard');
+
+});
