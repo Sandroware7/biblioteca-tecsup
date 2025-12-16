@@ -13,23 +13,37 @@
                     <form action="{{ route('books.store') }}" method="POST" class="max-w-lg mx-auto">
                         @csrf <div class="mb-5">
                             <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Título del Libro</label>
-                            <input type="text" name="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Ej: El Quijote" required>
+                            <input type="text" name="title" id="title" value="{{ old('title') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Ej: El Quijote" required>
                         </div>
 
                         <div class="mb-5">
                             <label for="author" class="block mb-2 text-sm font-medium text-gray-900">Autor</label>
-                            <input type="text" name="author" id="author" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            <input type="text" name="author" id="author" value="{{ old('author') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div class="mb-5">
                                 <label for="year" class="block mb-2 text-sm font-medium text-gray-900">Año</label>
-                                <input type="number" name="year" id="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <input type="number" name="year" id="year" value="{{ old('year') }}"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('year') border-red-500 bg-red-50 @enderror" required>
+
+                                @error('year')
+                                <p class="mt-2 text-sm text-red-600 font-medium">
+                                    El año debe ser válido (1900 - {{ date('Y') }}).
+                                </p>
+                                @enderror
                             </div>
 
                             <div class="mb-5">
-                                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900">Stock (Cantidad)</label>
-                                <input type="number" name="stock" id="stock" value="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900">Stock</label>
+                                <input type="number" name="stock" id="stock" value="{{ old('stock') }}"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('stock') border-red-500 bg-red-50 @enderror" required>
+
+                                @error('stock')
+                                <p class="mt-2 text-sm text-red-600 font-medium">
+                                    El stock debe ser al menos 1 unidad.
+                                </p>
+                                @enderror
                             </div>
                         </div>
 

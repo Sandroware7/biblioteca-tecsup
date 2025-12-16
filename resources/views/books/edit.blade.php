@@ -25,12 +25,26 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="mb-5">
                                 <label for="year" class="block mb-2 text-sm font-medium text-gray-900">Año</label>
-                                <input type="number" name="year" id="year" value="{{ $book->year }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <input type="number" name="year" id="year" value="{{ old('year', $book->year) }}"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('year') border-red-500 bg-red-50 @enderror" required>
+
+                                @error('year')
+                                <p class="mt-2 text-sm text-red-600 font-medium">
+                                    El año debe ser válido (1900 - {{ date('Y') }}).
+                                </p>
+                                @enderror
                             </div>
 
                             <div class="mb-5">
                                 <label for="stock" class="block mb-2 text-sm font-medium text-gray-900">Stock</label>
-                                <input type="number" name="stock" id="stock" value="{{ $book->stock }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <input type="number" name="stock" id="stock" value="{{ old('stock', $book->stock) }}"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('stock') border-red-500 bg-red-50 @enderror" required>
+
+                                @error('stock')
+                                <p class="mt-2 text-sm text-red-600 font-medium">
+                                    El stock debe ser al menos 1 unidad.
+                                </p>
+                                @enderror
                             </div>
                         </div>
 

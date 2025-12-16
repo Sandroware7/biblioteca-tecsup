@@ -46,7 +46,7 @@ class BookController extends Controller
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'year' => 'required|integer|min:1900|max:' . date('Y'),
-            'stock' => 'required|integer|min:0',
+            'stock' => 'required|integer|min:1',
         ]);
 
         \App\Models\Book::create($validated);
@@ -80,7 +80,7 @@ class BookController extends Controller
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'year' => 'required|integer|min:1900|max:' . date('Y'),
-            'stock' => 'required|integer|min:0',
+            'stock' => 'required|integer|min:1',
         ]);
 
         $book->update($validated);
