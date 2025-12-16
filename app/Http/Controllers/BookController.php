@@ -10,9 +10,22 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        $books = \App\Models\Book::paginate(10);
+        $query = \App\Models\Book::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('author', 'like', '%' . $search . '%')
+                    ->orWhere('year', 'like', '%' . $search . '%');
+            });
+        }
+
+        $books = $query->paginate(10)->withQueryString();
+
         return view('books.index', compact('books'));
     }
 
@@ -86,4 +99,5 @@ class BookController extends Controller
         return redirect()->route('books.index')
             ->with('success', '¡Libro eliminado correctamente!');
     }
+
 }

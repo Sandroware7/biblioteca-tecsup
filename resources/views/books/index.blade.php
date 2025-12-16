@@ -34,13 +34,30 @@
                         </div>
                     @endif
 
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg font-bold text-gray-700">Listado de Libros</h3>
-                        <a href="{{ route('books.create') }}"
-                           class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-sm transition duration-150 ease-in-out">
-                            + Nuevo Libro
-                        </a>
-                    </div>
+                        <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+
+                            <h3 class="text-xl font-bold text-gray-800 tracking-tight">
+                                Gestión de Biblioteca
+                            </h3>
+
+                            <form action="{{ route('books.index') }}" method="GET" class="flex w-full md:max-w-md shadow-sm rounded-lg overflow-hidden">
+                                <input type="text"
+                                       name="search"
+                                       value="{{ request('search') }}"
+                                       class="w-full px-4 py-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-none text-gray-700"
+                                       placeholder="Buscar título, autor o año..." >
+
+                                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 font-medium transition-colors duration-200 flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                    Buscar
+                                </button>
+                            </form>
+
+                            <a href="{{ route('books.create') }}"
+                               class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-sm transition duration-150 ease-in-out whitespace-nowrap">
+                                + Nuevo Libro
+                            </a>
+                        </div>
 
                     <div class="overflow-x-auto relative shadow-md sm:rounded-lg border border-gray-200">
                         <table class="w-full text-sm text-left text-gray-500">
@@ -98,4 +115,6 @@
             </div>
         </div>
     </div>
+
+
 </x-app-layout>
