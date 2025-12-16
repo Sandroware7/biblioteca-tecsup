@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="google" content="notranslate">
+
     <title>Catálogo - Biblioteca Tecsup</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -21,13 +24,16 @@
         }
     </script>
 </head>
-<body class="bg-gray-900 text-gray-300 antialiased font-sans">
+<body class="antialiased font-sans text-gray-900"
+      style="background-color: #9fb0be;
+             min-height: 100vh;
+             display: flex;
+             flex-direction: column;">
+<nav class="border-b border-gray-200 sticky top-0 z-50" style="background-color: #263142;">
 
-<nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <div class="flex items-center gap-2">
-                <span class="text-xl">📚</span>
                 <span class="text-lg font-bold text-white tracking-tight">Biblioteca Tecsup</span>
             </div>
 
@@ -36,7 +42,7 @@
                     @auth
                         @if(Auth::user()->role === 'admin')
                             <a href="{{ route('books.index') }}" class="text-sm font-semibold text-blue-400 hover:text-blue-300 transition border border-blue-400/30 px-3 py-1 rounded">
-                                ⚙️ Gestión Admin
+                                Gestión Admin
                             </a>
                         @else
                             <a href="{{ route('dashboard') }}" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition border border-emerald-400/30 px-3 py-1 rounded">
@@ -63,10 +69,10 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
     <div class="text-center mb-10">
-        <h1 class="text-3xl font-bold text-white mb-3">
+        <h1 class="text-3xl font-bold text-gray-700 mb-3">
             Catálogo de Libros
         </h1>
-        <p class="text-base text-gray-400 mb-8 max-w-xl mx-auto">
+        <p class="text-base text-gray-850 mb-8 max-w-xl mx-auto">
             Consulta la disponibilidad física de material bibliográfico en tiempo real.
         </p>
 
@@ -78,7 +84,7 @@
                     </svg>
                 </div>
                 <input type="text" name="search" value="{{ request('search') }}"
-                       class="w-full pl-9 px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-sm text-white placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                       class="w-full pl-9 px-4 py-2 bg-whitborder border-gray-700 rounded-md text-sm text-white placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                        placeholder="Buscar por título, autor o año...">
             </div>
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded-md shadow transition">
@@ -144,9 +150,13 @@
     </div>
 </div>
 
-<footer class="border-t border-gray-800 mt-12 py-6 text-center text-gray-600 text-xs">
-    &copy; {{ date('Y') }} Biblioteca Tecsup.
-</footer>
+<footer class="border-t py-4 text-center text-xs"
+        style="background-color: #263141;
+               border-color: #e5e7eb;
+               color: #fdfdfd;
+               width: 100%;
+               margin-top: auto;"> &copy; {{ date('Y') }} Biblioteca Tecsup - Grupo 03.
 
+</footer>
 </body>
 </html>
