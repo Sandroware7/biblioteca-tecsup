@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relación: Un usuario puede tener muchos préstamos
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }
