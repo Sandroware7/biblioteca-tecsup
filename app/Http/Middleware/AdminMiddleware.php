@@ -15,10 +15,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role === 'admin') {
-            return $next($request); // ¡Adelante, pase!
+        if ($request->user()->role !== 'admin') {
+            abort(403, 'ACCESO DENEGADO: No tienes permisos de administrador.');
         }
 
-        abort(403, 'Acceso no autorizado. Solo personal administrativo.');
+        return $next($request);
     }
 }

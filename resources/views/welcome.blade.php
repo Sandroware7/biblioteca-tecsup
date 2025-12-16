@@ -34,9 +34,15 @@
             <div class="flex items-center space-x-6">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ route('books.index') }}" class="text-sm font-semibold text-blue-400 hover:text-blue-300 transition">
-                            Ir a Gestión →
-                        </a>
+                        @if(Auth::user()->role === 'admin')
+                            <a href="{{ route('books.index') }}" class="text-sm font-semibold text-blue-400 hover:text-blue-300 transition border border-blue-400/30 px-3 py-1 rounded">
+                                ⚙️ Gestión Admin
+                            </a>
+                        @else
+                            <a href="{{ route('dashboard') }}" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition border border-emerald-400/30 px-3 py-1 rounded">
+                                Mi Dashboard
+                            </a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}" class="text-sm font-medium text-gray-400 hover:text-white transition">
                             Iniciar Sesión
@@ -61,7 +67,7 @@
             Catálogo de Libros
         </h1>
         <p class="text-base text-gray-400 mb-8 max-w-xl mx-auto">
-            Consulta la disponibilidad de material bibliográfico en tiempo real.
+            Consulta la disponibilidad física de material bibliográfico en tiempo real.
         </p>
 
         <form action="{{ route('home') }}" method="GET" class="max-w-xl mx-auto flex gap-2">
@@ -101,17 +107,24 @@
                 </div>
 
                 <div class="bg-gray-800/80 px-5 py-3 border-t border-gray-700 flex justify-between items-center">
-                    <span class="text-xs font-medium text-gray-500 uppercase tracking-wide">Estado</span>
+                    <span class="text-xs font-medium text-gray-500 uppercase tracking-wide">Disponibilidad</span>
 
-                    @if($book->stock > 0)
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-900/50 text-green-400 border border-green-800/50">
-                                <span class="w-1.5 h-1.5 mr-1.5 bg-green-400 rounded-full"></span>
-                                Disponible ({{ $book->stock }})
+                    @if($book->available > 0)
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-900/50 text-green-400 border border-green-800/50" title="Puedes venir a recogerlo">
+                                <span class="w-1.5 h-1.5 mr-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                                En estantería: {{ $book->available }}
                             </span>
+
+                    @elseif($book->stock > 0 && $book->available == 0)
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-orange-900/50 text-orange-400 border border-orange-800/50" title="Todas las copias están prestadas">
+                                <span class="w-1.5 h-1.5 mr-1.5 bg-orange-400 rounded-full"></span>
+                                Todos Prestados
+                            </span>
+
                     @else
                         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-900/50 text-red-400 border border-red-800/50">
                                 <span class="w-1.5 h-1.5 mr-1.5 bg-red-500 rounded-full"></span>
-                                Agotado
+                                No Disponible
                             </span>
                     @endif
                 </div>
