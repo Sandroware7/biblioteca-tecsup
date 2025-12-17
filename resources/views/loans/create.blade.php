@@ -9,8 +9,8 @@
     <style>
         .select2-container .select2-selection--single {
             height: 42px !important;
-            border-color: #d1d5db !important; /* gris-300 */
-            border-radius: 0.375rem !important; /* rounded-md */
+            border-color: #d1d5db !important;
+            border-radius: 0.375rem !important;
             padding-top: 6px;
         }
         .select2-container--default .select2-selection--single .select2-selection__arrow {

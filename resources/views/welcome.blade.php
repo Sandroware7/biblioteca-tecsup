@@ -84,7 +84,7 @@
                     </svg>
                 </div>
                 <input type="text" name="search" value="{{ request('search') }}"
-                       class="w-full pl-9 px-4 py-2 bg-whitborder border-gray-700 rounded-md text-sm text-white placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                       class="w-full pl-9 px-4 py-2 bg-whitborder border-gray-700 rounded-md text-sm text-g placeholder-gray-500 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                        placeholder="Buscar por título, autor o año...">
             </div>
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded-md shadow transition">

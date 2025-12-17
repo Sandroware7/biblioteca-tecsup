@@ -4,23 +4,22 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Book>
- */
 class BookFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
+        $topics = ['Algoritmos', 'Python', 'React', 'Sistemas', 'Redes', 'Circuitos', 'Mecatrónica', 'Big Data', 'Machine Learning', 'Seguridad', 'Cloud Computing', 'Docker', 'Kubernetes', 'DevOps', 'Matemática Discreta', 'Física Aplicada'];
+        $levels = ['Avanzado', 'para Principiantes', 'Aplicado', 'Moderno', 'en la Industria', 'Fundamental', 'Práctico', 'y sus Aplicaciones', 'Integral'];
+
+        $title = $this->faker->randomElement($topics) . ' ' . $this->faker->randomElement($levels);
+
         return [
-            'title' => fake()->sentence(3),
-            'author' => fake()->name(),
-            'year' => fake()->numberBetween(1990, 2024),
-            'stock' => fake()->numberBetween(1, 10),
+            'title' => $title,
+            'author' => $this->faker->name(),
+            'stock' => $this->faker->numberBetween(1, 15),
+
+            // AGREGAMOS ESTA LÍNEA PARA SOLUCIONAR EL ERROR:
+            'year' => $this->faker->year(),
         ];
     }
 }
