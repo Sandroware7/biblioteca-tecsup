@@ -1,59 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Sistema de Biblioteca Tecsup
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema de gestión bibliotecaria desarrollado en **Laravel 11**. Permite a los estudiantes reservar libros y a los administradores gestionar el inventario, los préstamos y las devoluciones.
 
-## About Laravel
+## 🚀 Características Principales
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🎓 Perfil Estudiante
+* **Catálogo en Vivo:** Visualización de libros con indicador de stock y disponibilidad (Verde/Rojo).
+* **Solicitud de Préstamos:** Interfaz sencilla para reservar libros disponibles.
+* **Dashboard Personal:** Visualización del historial de préstamos y estado actual.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 👮‍♂️ Perfil Administrador
+* **Gestión Total (CRUD):** Crear, editar y eliminar libros del sistema.
+* **Gestión de Préstamos:** Panel exclusivo para ver quién tiene cada libro.
+* **Control de Devoluciones:** Funcionalidad para registrar el retorno de libros (restaura el stock automáticamente).
+* **Seguridad:** Rutas protegidas mediante Middleware personalizado (`IsAdmin`) para evitar accesos no autorizados.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🛠️ Requisitos e Instalación
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Sigue estos pasos para desplegar el proyecto en tu máquina local:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Clonar el repositorio**
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd biblioteca-tecsup
 
-## Laravel Sponsors
+2. **Instalar dependencias de PHP y Node**
+    ```bash
+    composer install
+    npm install && npm run build
+3. **Configurar entorno**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Renombrar el archivo de configuración:
+   ```bash
+  cp .env.example .envd
+   
+- Renombrar el archivo de configuración:
+    ```bash
+    php artisan key:generate
+  
+- Asegúrate de que la base de datos (SQLite) esté configurada en el archivo .env.
 
-### Premium Partners
+4. **Base de Datos y Datos de Prueba Ejecuta este comando para crear las tablas y cargar los usuarios por defecto y 250 libros de prueba:**
+    ```bash
+    php artisan migrate:fresh --seed
+   
+5. **Iniciar Servidor**
+    ```bash
+    php artisan serve
+   
+## 🔑 Credenciales de Acceso
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+El sistema viene pre-cargado con usuarios de prueba (generados por el Seeder), pero también permite el registro manual con roles dinámicos.
 
-## Contributing
+### 👤 Usuarios por Defecto
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Rol           | Correo                 | Contraseña |
+|---------------|------------------------|------------|
+| Administrador | admin@tecsup.edu.pe    | password   |
+| Estudiante    | alumno@tecsup.edu.pe   | password   |
 
-## Code of Conduct
+### 📝 Registro de Nuevos Usuarios
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+El formulario de registro (/register) cuenta con un sistema de roles:
 
-## Security Vulnerabilities
+1. **Para ser Estudiante: Deja el campo "Código de Empleado" vacío.**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Para ser Administrador: Ingresa la clave maestra TECSUP2025 en el campo "Código de Empleado".**
 
-## License
+### 💻 Tecnologías Utilizadas
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Backend: Laravel 11 (PHP 8.2+)
+
+- Frontend: Blade, Tailwind CSS, Alpine.js
+
+- Base de Datos: SQLite
+
+- Autenticación: Laravel Breeze
