@@ -49,6 +49,8 @@ class BookController extends Controller
             'stock' => 'required|integer|min:1',
         ]);
 
+        $validated['available'] = $validated['stock'];
+
         \App\Models\Book::create($validated);
 
         return redirect()->route('books.index')
